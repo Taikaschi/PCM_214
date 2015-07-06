@@ -1,13 +1,4 @@
 {
-	/*
-		name: Name des Gerichts
-		time: Zeit in Minuten
-		kcal: Kalorien
-		protein: Eiweiß
-		fat: Fett
-		ch: Kolenhydrate
-		src: Quelle
-	*/
 	{
 		name: 'Penne-Hähnchen-Auflauf mit Mozzarella-Brot-Kruste',
 		time: 45,
