@@ -196,5 +196,5 @@
 		fat: 42,
 		ch: 63,
 		src: 'http://www.lecker.de/rezept/2533347/Kartoffel-Kraeutersalat.html'
-	},
+	}
 }
