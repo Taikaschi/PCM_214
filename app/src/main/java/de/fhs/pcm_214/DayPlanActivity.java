@@ -1,40 +1,22 @@
 package de.fhs.pcm_214;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class DayPlanActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Button dp_test = (Button) findViewById(R.id.dp_test);
-        dp_test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               Intent DayPlanIntent = new Intent();
-               DayPlanIntent.setClass(MainActivity.this, DayPlanActivity.class);
-               startActivity(DayPlanIntent);
-
-             
-            }
-        });
-
-
-
+        setContentView(R.layout.activity_day_plan);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_day_plan, menu);
         return true;
     }
 

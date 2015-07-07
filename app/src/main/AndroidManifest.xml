@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DayPlanActivity"
+            android:label="@string/title_activity_day_plan" >
+        </activity>
     </application>
 
 </manifest>
