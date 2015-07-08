@@ -47,13 +47,13 @@ public class WeekPlanActivity extends Activity {
 
         Week week_data[] = new Week[]
                 {
-                        new Week(R.drawable.ball_red, "Montag"),
-                        new Week(R.drawable.ball_red, "Dienstag"),
-                        new Week(R.drawable.ball_red, "Mittwoch"),
-                        new Week(R.drawable.ball_red, "Donnerstag"),
-                        new Week(R.drawable.ball_red, "Freitag"),
-                        new Week(R.drawable.ball_red, "Samstag"),
-                        new Week(R.drawable.ball_red, "Sonntag")
+                        new Week(R.drawable.ball_red, "Montag", "06.07.2015"),
+                        new Week(R.drawable.ball_red, "Dienstag", "07.07.2015"),
+                        new Week(R.drawable.ball_red, "Mittwoch", "08.07.2015"),
+                        new Week(R.drawable.ball_red, "Donnerstag", "09.07.2015"),
+                        new Week(R.drawable.ball_red, "Freitag", "10.07.2015"),
+                        new Week(R.drawable.ball_red, "Samstag", "11.07.2015"),
+                        new Week(R.drawable.ball_red, "Sonntag", "12.07.2015")
                 };
 
         WeekAdapter adapter = new WeekAdapter(this,
