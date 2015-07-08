@@ -15,6 +15,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button wp_test = (Button) findViewById(R.id.wp_test);
+        wp_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent WeekPlanIntent = new Intent();
+                WeekPlanIntent.setClass(MainActivity.this, WeekPlanActivity.class);
+                startActivity(WeekPlanIntent);
+            }
+        });
+
         Button dp_test = (Button) findViewById(R.id.dp_test);
         dp_test.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(KatalogIntent);
             }
         });
+
     }
 
 

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,14 +18,14 @@
         android:gravity="center_horizontal"
         android:text="@string/textViewDate"
         android:textAlignment="center"
-        android:textSize="20dp"
+        android:textSize="24dp"
         android:textStyle="bold" />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.1" />
+        android:layout_weight="0.25" />
 
 
     <RelativeLayout
@@ -216,7 +217,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:orientation="horizontal">
 
 
@@ -224,16 +225,22 @@
             android:id="@+id/cancel_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_cancel" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/button_cancel"
+            android:minHeight="64dp"
+            android:minWidth="64dp" />
 
         <Button
             android:id="@+id/add_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentTop="false"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/button_add" />
+            android:background="@drawable/button_add"
+            android:minHeight="64dp"
+            android:minWidth="64dp" />
 
         <Button
             android:id="@+id/ok_button"
@@ -241,9 +248,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:gravity="right"
             android:background="@drawable/ok_button"
-             />
+            android:gravity="right"
+            android:minHeight="64dp"
+            android:minWidth="64dp" />
     </RelativeLayout>
 
 </LinearLayout>
