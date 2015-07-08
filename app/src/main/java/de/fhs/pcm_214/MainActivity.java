@@ -19,17 +19,23 @@ public class MainActivity extends AppCompatActivity {
         dp_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent DayPlanIntent = new Intent();
-               DayPlanIntent.setClass(MainActivity.this, DayPlanActivity.class);
-               startActivity(DayPlanIntent);
-
-             
+                Intent DayPlanIntent = new Intent();
+                DayPlanIntent.setClass(MainActivity.this, DayPlanActivity.class);
+                startActivity(DayPlanIntent);
             }
         });
 
-
-
+        Button katalog_test = (Button) findViewById(R.id.katalog_test);
+        katalog_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent KatalogIntent = new Intent();
+                KatalogIntent.setClass(MainActivity.this, MainActivity_Katalog.class);
+                startActivity(KatalogIntent);
+            }
+        });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

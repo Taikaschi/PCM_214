@@ -21,5 +21,12 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="Zum Tagesplan" />
+    <Button
+        android:id="@+id/katalog_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zum Katalog"
+        android:layout_above="@+id/dp_test"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
