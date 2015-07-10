@@ -15,6 +15,9 @@ public class Timestamp {
     private int month;
     private int year;
 
+    private final String[] days = {"Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"};
+
+
     public Timestamp() {}
 
     public Timestamp(int year, int month, int day) {
@@ -70,5 +73,15 @@ public class Timestamp {
         calendar.add(Calendar.DAY_OF_MONTH, -7);                                                                                                        //-7
         int daywithoffset = (calendar.get(Calendar.YEAR) * 10000) + ((calendar.get(Calendar.MONTH) + 1) * 100) + (calendar.get(Calendar.DAY_OF_MONTH));
         return (String.valueOf(daywithoffset));
+    }
+
+    public String getFullDate() {
+        calendar = Calendar.getInstance();
+
+        String FullDate;
+
+        FullDate = days[this.getDay()] + ", " + getDay() + "." + getMonth() + "." + getYear();
+
+        return FullDate;
     }
 }

@@ -1,6 +1,7 @@
 package de.fhs.pcm_214;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,12 +11,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 
 public class ParseCSV {
 
 
     private File cacheDir;
     private Context fileContext;
+    ArrayList<Day> all = null;
+    ArrayList<Day> week = null;
 
     public ParseCSV(Context fileContext) {
         this.fileContext = fileContext;
@@ -35,43 +39,53 @@ public class ParseCSV {
 */
 
 
-    //
-    //          angenommen wird folgendes Format:
-    //          TIMESTAMP,[rezeptx, rezepty, rezeptz, rezepta]
-    //          bsp.                anderes bsp.
-    //          20150722,1,3,7,18   19991201,6,7,23
-    //
-
 
     public void readCSVFile(FileInputStream fin) {
+        BufferedReader reader = null;
+        String line;
+        Day tmp = null;
+
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
-            String line;
-            while ((line = reader.readLine()) != null) {
+            reader = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
 
-                String[] timestamp_recipes = line.split("\\,");
+            while ((line = reader.readLine()) != null) {                        // Zeilenweise einlesen
 
-                int timestamp = Integer.parseInt(timestamp_recipes[0]);
+                String[] recipe_log = line.split("\\,");                 // eingelesenen String bei Kommas aufspllitten und teilstrings als elemente ins array
+                Timestamp timestamp =  new Timestamp(recipe_log[0]);
+                int[] recipes = new int[recipe_log.length-1];            // recipe-array größe = gesamt - timestamp
 
-                //for (int i = 1; i < timestamp_recipes.length; i++)
+                for (int i = 0; i != recipe_log.length; i++) {           // die restlichen werte herausholen ...
+                    recipes[i] = Integer.parseInt(recipe_log[i+1]);      // ...umwandeln und neu verpacken
+                }
 
-/////////////////// HIER MUSS NOCH WAS PASSIEREN !!!!!!!!!!!!!!!
-
-
+                tmp.setRecipes(recipes);                                        // objekt erzeugt
+                tmp.setTimestamp(timestamp);
+                all.add(tmp);
             }
+
             reader.close();
         } catch (FileNotFoundException e) {
-
+            Toast.makeText(ParseCSV.this.fileContext,"FileNotFoundException",Toast.LENGTH_LONG).show();
         } catch (IOException e) {
         }
 
     }
 
-    public boolean writeCSVFile(FileOutputStream fout, int Timestamp, String text) {
-        OutputStreamWriter writer = null;
-        try {
 
-            text = Timestamp + text;
+
+    public boolean writeCSVFile(FileOutputStream fout, int Timestamp, int[] recipes) {
+
+        OutputStreamWriter writer = null;
+        String text = "";
+
+        try {
+            text = String.valueOf(Timestamp) + ",";             // TIMESTAMP,
+
+            for (int i = 1; i != recipes.length; i++) {         //x,y,z,
+                text = text + String.valueOf(recipes[i]) + ",";
+            }
+            text.substring(0,text.length()-1);                  // entfernt letztes komma
+
             writer = new OutputStreamWriter(fout);
             writer.write(text);
             writer.flush();
