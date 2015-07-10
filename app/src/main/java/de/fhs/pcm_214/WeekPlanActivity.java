@@ -67,8 +67,16 @@ public class WeekPlanActivity extends Activity {
 
         listView1.setAdapter(adapter);
 
+        View bottom = (View) getLayoutInflater().inflate(R.layout.list_view_bottom_row, null);
+        listView1.addFooterView(bottom);
+
         Calendar calendar = Calendar.getInstance();
         TextView textView = (TextView)findViewById(R.id.txtHeader);
         textView.setText("Woche:" + calendar.get(Calendar.WEEK_OF_YEAR));
+
+        TextView textView1 = (TextView)findViewById(R.id.txtFooder);
+        textView1.setText("Datum: " + calendar.get(Calendar.DAY_OF_MONTH) + "." +
+                (calendar.get(Calendar.MONTH)+1) +"."+ calendar.get(Calendar.YEAR));
+
     }
 }
