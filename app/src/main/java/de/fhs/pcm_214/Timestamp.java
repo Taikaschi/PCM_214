@@ -80,7 +80,8 @@ public class Timestamp {
 
         String FullDate;
 
-        FullDate = days[this.getDay()] + ", " + getDay() + "." + getMonth() + "." + getYear();
+        // so nicht m(
+        // FullDate = days[this.getDay()] + ", " + getDay() + "." + getMonth() + "." + getYear();
 
         return FullDate;
     }
