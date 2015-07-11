@@ -21,6 +21,10 @@ public class ParseCSV {
     ArrayList<Day> all = null;
     ArrayList<Day> week = null;
 
+    BufferedReader reader = null;
+    String line;
+    Day tmp = null;
+
     public ParseCSV(Context fileContext) {
         this.fileContext = fileContext;
         if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
@@ -31,71 +35,105 @@ public class ParseCSV {
             cacheDir.mkdirs();
     }
 
+
+    public void createEntry(FileOutputStream out, Timestamp timestamp, int[] recipes) {         //TODO: sicherstellen das die einträge chronologisch erfolgen
+        OutputStreamWriter writer = null;
+        String line = "";
+
+        try {
+            line = String.valueOf(timestamp) + ",";                     // Zeile zum schreiben zusammenbauen
+            for (int i = 1; i != recipes.length; i++) {
+                line = line + String.valueOf(recipes[i]) + ",";
+            }
+            line.substring(0, line.length() - 1);
+
+            writer = new OutputStreamWriter(out);
+            writer.write(line);
+            writer.flush();
+            writer.close();
+
+        }
+        catch (FileNotFoundException e) { Toast.makeText(ParseCSV.this.fileContext, "FileNotFoundException", Toast.LENGTH_LONG).show();}
+        catch (IOException e) { Toast.makeText(ParseCSV.this.fileContext, "IOException", Toast.LENGTH_LONG).show(); }
+
+    }
+
+    public int[] readEntry(FileInputStream in, Timestamp timestamp) {
+        String[] recipe_log = null;
+        Timestamp timestamp2 = null;
+        int[] recipes = null;
+
+        try {
+
+            reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+
+            while ((line = reader.readLine()) != null) {
+
+                recipe_log = line.split("\\,");
+                timestamp2 = new Timestamp(recipe_log[0]);
+                recipes = new int[recipe_log.length - 1];
+
+                if (timestamp.equals(timestamp2)) {
+
+                    for (int i = 0; i != recipe_log.length; i++) {
+                        recipes[i] = Integer.parseInt(recipe_log[i + 1]);
+                    }
+                }
+            }
+            reader.close();
+        }
+        catch (FileNotFoundException e) { Toast.makeText(ParseCSV.this.fileContext, "FileNotFoundException", Toast.LENGTH_LONG).show();}
+        catch (IOException e) { Toast.makeText(ParseCSV.this.fileContext, "IOException", Toast.LENGTH_LONG).show(); }
+
+        return recipes;
+    }
+
+    public void updateEntry(FileInputStream in, FileOutputStream out, Timestamp timestamp, int[] recipes) {             //TODO
+
+    }
+
+    public void deleteEntry(FileInputStream in, FileOutputStream out, Timestamp timestamp) {                            //TODO
+
+    }
 /*
-    public File getFile(String fileName) {
-        File file = new File(cacheDir, fileName);
-        return file;
+    public int[] getWholeList(FileInputStream in) {
+        String[] recipe_log = null;
+        Timestamp timestamp2 = null;
+        int[] recipes = null;
+
+        try {
+
+            reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+
+            while ((line = reader.readLine()) != null) {
+
+                recipe_log = line.split("\\,");
+                timestamp2 = new Timestamp(recipe_log[0]);
+                recipes = new int[recipe_log.length - 1];
+
+                for (int i = 0; i != recipe_log.length; i++) {
+                    recipes[i] = Integer.parseInt(recipe_log[i + 1]);
+                }
+            }
+            reader.close();
+        }
+        catch (FileNotFoundException e) { Toast.makeText(ParseCSV.this.fileContext, "FileNotFoundException", Toast.LENGTH_LONG).show();}
+        catch (IOException e) { Toast.makeText(ParseCSV.this.fileContext, "IOException", Toast.LENGTH_LONG).show(); }
+
+        return recipes;
     }
 */
 
 
+    public Day[] getWeek(FileInputStream in, Timestamp monday) {
+        Day[] week = new Day[7];
 
-    public void readCSVFile(FileInputStream fin) {
-        BufferedReader reader = null;
-        String line;
-        Day tmp = null;
+        for (int i = 0; i != week.length; i++) {
+            week[i].setTimestamp(new Timestamp(monday.getYear(),monday.getMonth(),monday.getDay()+i));
+            week[i].setRecipes(readEntry(in,new Timestamp(monday.getYear(),monday.getMonth(),monday.getDay()+i)));
+        };
 
-        try {
-            reader = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
-
-            while ((line = reader.readLine()) != null) {                        // Zeilenweise einlesen
-
-                String[] recipe_log = line.split("\\,");                 // eingelesenen String bei Kommas aufspllitten und teilstrings als elemente ins array
-                Timestamp timestamp =  new Timestamp(recipe_log[0]);
-                int[] recipes = new int[recipe_log.length-1];            // recipe-array größe = gesamt - timestamp
-
-                for (int i = 0; i != recipe_log.length; i++) {           // die restlichen werte herausholen ...
-                    recipes[i] = Integer.parseInt(recipe_log[i+1]);      // ...umwandeln und neu verpacken
-                }
-
-                tmp.setRecipes(recipes);                                        // objekt erzeugt
-                tmp.setTimestamp(timestamp);
-                all.add(tmp);
-            }
-
-            reader.close();
-        } catch (FileNotFoundException e) {
-            Toast.makeText(ParseCSV.this.fileContext,"FileNotFoundException",Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-        }
-
-    }
-
-
-
-    public boolean writeCSVFile(FileOutputStream fout, int Timestamp, int[] recipes) {
-
-        OutputStreamWriter writer = null;
-        String text = "";
-
-        try {
-            text = String.valueOf(Timestamp) + ",";             // TIMESTAMP,
-
-            for (int i = 1; i != recipes.length; i++) {         //x,y,z,
-                text = text + String.valueOf(recipes[i]) + ",";
-            }
-            text.substring(0,text.length()-1);                  // entfernt letztes komma
-
-            writer = new OutputStreamWriter(fout);
-            writer.write(text);
-            writer.flush();
-            writer.close();
-            return true;
-        } catch (FileNotFoundException e) {
-            return false;
-        } catch (IOException e) {
-            return false;
-        }
+        return week;
     }
 
     public void clear() {
@@ -105,4 +143,11 @@ public class ParseCSV {
         for (File f : files)
             f.delete();
     }
+
+    /*
+    public File getFile(String fileName) {
+        File file = new File(cacheDir, fileName);
+        return file;
+    }
+*/
 }

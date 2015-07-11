@@ -84,4 +84,13 @@ public class Timestamp {
 
         return FullDate;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        //http://stackoverflow.com/questions/185937/overriding-the-java-equals-method-quirk
+        Timestamp timestamp = (Timestamp) o;
+        if (timestamp == null) return false;
+        if (this.getDay() == timestamp.getDay() && this.getMonth() == timestamp.getMonth() && this.getYear() == timestamp.getYear()) return true;
+        else return false;
+    }
 }
