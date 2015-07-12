@@ -19,6 +19,7 @@ public class MainActivity_Katalog extends ActionBarActivity {
 
     private ListView list;
     ArrayList<Item> model = new ArrayList<Item>();
+    int result[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +96,7 @@ public class MainActivity_Katalog extends ActionBarActivity {
         {
             pickChecked();
             Intent intent = new Intent(MainActivity_Katalog.this, DayPlanActivity.class);
-            intent.putStringArrayListExtra("result", null);
+            intent.putExtra("result",result);
             startActivity(intent);
             return true;
         }
@@ -115,7 +116,7 @@ public class MainActivity_Katalog extends ActionBarActivity {
     public void pickChecked(){
 
         int maxItems = 4;
-        int[] result = new int[maxItems];
+        result = new int[maxItems];
         for (int i=0; i<maxItems; i++)
         {
             result[i] = -1;
