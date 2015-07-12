@@ -3,6 +3,7 @@ package de.fhs.pcm_214;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class Timestamp implements Comparable<Timestamp>{
@@ -99,6 +100,7 @@ public class Timestamp implements Comparable<Timestamp>{
     }
 
     public String getDateName(Timestamp timestamp) {
+
         DateFormatSymbols dfs = new DateFormatSymbols(new Locale("de"));
         String weekdays[] = dfs.getWeekdays();
         calendar.set(timestamp.getYear(), timestamp.getMonth(), timestamp.getDay());
@@ -114,6 +116,14 @@ public class Timestamp implements Comparable<Timestamp>{
         FullDate = getDateName() + ", " + getDay() + "." + getMonth() + "." + getYear();
 
         return FullDate;
+    }
+
+    public Timestamp getMonday() {      // gibt den Montag, der Woche zurück, in der wir uns befinden
+
+        calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        this.setYyyymmdd(String.valueOf(calendar.getTime().getYear()) + String.valueOf(calendar.getTime().getMonth()) + String.valueOf(calendar.getTime().getDay()));
+        return this;
     }
 
 
