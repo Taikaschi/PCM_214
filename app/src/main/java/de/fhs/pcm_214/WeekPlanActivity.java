@@ -1,9 +1,11 @@
 package de.fhs.pcm_214;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -42,6 +44,16 @@ public class WeekPlanActivity extends Activity {
 
 
         listView1 = (ListView) findViewById(R.id.listView1);
+
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), DayPlanActivity.class);
+                intent.putExtra("DAY", new Timestamp().getTimestampWithOffset(i));
+                startActivity(intent);
+            }
+        });
+
 
         View header = (View) getLayoutInflater().inflate(R.layout.list_view_header_row, null);
         listView1.addHeaderView(header);
