@@ -161,16 +161,16 @@ public class ParseCSV {
 */
 
 
-    public Day[] getWeek(FileInputStream in, Timestamp monday) {
-        Day[] week = new Day[7];
+    public ArrayList<Day> getWeek(FileInputStream in, Timestamp monday) {
+        ArrayList<Day> list = new ArrayList<>(7);
 
-        for (int i = 0; i != week.length; i++) {
-            week[i].setTimestamp(new Timestamp(monday.getYear(), monday.getMonth(), monday.getDay() + i));
-            week[i].setRecipes(readEntry(in, new Timestamp(monday.getYear(), monday.getMonth(), monday.getDay() + i)));
+
+
+        for (int i = 0; i < 7; i++) {
+            list.add(new Day(new Timestamp(monday.getTimestampWithOffset(i)), readEntry(in,new Timestamp(new Timestamp().getTimestampWithOffset(i)))));
         }
 
-
-        return week;
+        return list;
     }
 
 

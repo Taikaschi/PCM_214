@@ -10,8 +10,15 @@ public class Day {
     public int[] recipes;
     public int icon;
 
+
     public Day() {
         super();
+    }
+
+
+    public Day(Timestamp timestamp, int[] recipes) {
+        this.timestamp = timestamp;
+        this.recipes = recipes;
     }
 
     public Day(int[] recipes) {

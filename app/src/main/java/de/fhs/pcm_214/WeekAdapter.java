@@ -9,15 +9,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 /**
  * Created by Sebastian on 08.07.2015.
  */
-public class WeekAdapter extends ArrayAdapter<Week> {
+public class WeekAdapter extends ArrayAdapter<Day> {
     Context context;
     int layoutResourceId;
-    Week data[] = null;
-    public WeekAdapter(Context context, int layoutResourceId, Week[] data) {
+    ArrayList<Day> data;
+    FileInputStream in;
+
+
+    ParseCSV parseCSV;
+    public WeekAdapter(Context context, int layoutResourceId, ArrayList<Day> data) {
         super(context, layoutResourceId, data);
+
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
@@ -31,6 +41,8 @@ public class WeekAdapter extends ArrayAdapter<Week> {
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new WeekHolder();
+
+
             holder.imgIcon = (ImageView)row.findViewById(R.id.imgIcon);
             holder.txtTitle = (TextView)row.findViewById(R.id.txtTitle);
             holder.txtDate = (TextView)row.findViewById(R.id.txtDate);
@@ -40,10 +52,13 @@ public class WeekAdapter extends ArrayAdapter<Week> {
         {
             holder = (WeekHolder)row.getTag();
         }
-        Week week = data[position];
-        holder.txtTitle.setText(week.title);
-        holder.imgIcon.setImageResource(week.icon);
-        holder.txtDate.setText(week.date);
+
+        Day day = getItem(position);
+
+        holder.txtTitle.setText(day.getTimestamp().getDateName());
+
+        holder.imgIcon.setImageResource(day.icon);
+        holder.txtDate.setText(day.getTimestamp().getFullDate());
         return row;
     }
     static class WeekHolder

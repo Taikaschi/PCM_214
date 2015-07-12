@@ -8,6 +8,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -22,42 +26,19 @@ public class WeekPlanActivity extends Activity {
 
         ParseCSV parseCSV = null;
 
-        String[] rezepte = {
-                "Penne-Hähnchen-Auflauf mit Mozzarella-Brot-Kruste",
-                "Italienischer Nudelauflauf mit Tomaten und Bacon",
-                "Nudel-Gemüse-Auflauf",
-                "Nudel-Auflauf mit Blumenkohl und Spinat zu Tomatensoße",
-                "Makkaroni-Bratwurst-Auflauf mit Möhren und Champignons",
-                "Kohlrabi-Kartoffelsuppe mit Räucherlachs und Kresse",
-                "Cremige Apfel-Sellerie-Suppe",
-                "Hühnersuppe mit Nudeln",
-                "Portugiesischer Maisgrieß-Kuchen",
-                "Luftiger Himbeerkuchen",
-                "Kokos-Streuselkuchen mit Ananas",
-                "Kartoffel-Tortilla",
-                "Portugiesische Kartoffelsuppe mit Chorizo",
-                "Kartoffelpuffer mit Apfelmus",
-                "Chicken-Burger mit Mangosalsa und Guacamole",
-                "Zwiebelringe in Bierteig",
-                "Schweinebraten-Burger mit Texassoße",
-                "Backkartoffelsalat mit Rucolapesto",
-                "Klassischer Kartoffelsalat mit Brühe",
-                "Kartoffelsalat mit gebratener Zucchini, Paprika und Kichererbsen",
-                "Kartoffel-Kräutersalat"};
+        FileInputStream in = null;
+        try {
+            in = new FileInputStream(new File("recipe.log"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
-        Week week_data[] = new Week[]
-                {
-                        new Week(R.drawable.ball_red, "Montag", "06.07.2015"),
-                        new Week(R.drawable.ball_red, "Dienstag", "07.07.2015"),
-                        new Week(R.drawable.ball_red, "Mittwoch", "08.07.2015"),
-                        new Week(R.drawable.ball_red, "Donnerstag", "09.07.2015"),
-                        new Week(R.drawable.ball_red, "Freitag", "10.07.2015"),
-                        new Week(R.drawable.ball_red, "Samstag", "11.07.2015"),
-                        new Week(R.drawable.ball_red, "Sonntag", "12.07.2015")
-                };
+        parseCSV = new ParseCSV(getApplicationContext());
 
-        WeekAdapter adapter = new WeekAdapter(this,
-                R.layout.list_view_item_row, week_data);
+        ArrayList<Day> list = parseCSV.getWeek(in, new Timestamp().getMonday());
+
+
+        WeekAdapter adapter = new WeekAdapter(this, R.layout.list_view_item_row, list);
 
 
         listView1 = (ListView) findViewById(R.id.listView1);

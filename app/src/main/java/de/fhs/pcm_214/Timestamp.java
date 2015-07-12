@@ -18,7 +18,10 @@ public class Timestamp implements Comparable<Timestamp>{
 
     private String yyyymmdd;
 
-    public Timestamp() {}
+    public Timestamp() {
+        calendar = Calendar.getInstance();
+
+    }
 
     public Timestamp(int year, int month, int day) {
         this.day = day;
@@ -113,7 +116,9 @@ public class Timestamp implements Comparable<Timestamp>{
     public String getFullDate() {
         calendar = Calendar.getInstance();
         String FullDate;
-        FullDate = getDateName() + ", " + getDay() + "." + getMonth() + "." + getYear();
+        //FullDate = getDateName() + ", " + getDay() + "." + getMonth() + "." + getYear();
+        FullDate = getDay() + "." + getMonth() + "." + getYear();
+
 
         return FullDate;
     }
