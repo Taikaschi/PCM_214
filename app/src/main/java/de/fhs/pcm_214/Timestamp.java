@@ -1,22 +1,18 @@
 package de.fhs.pcm_214;
 
+
+import java.text.DateFormatSymbols;
 import java.util.Calendar;
+import java.util.Locale;
 
-
-
-/**
- * Created by soma on 09.07.15.
- */
 public class Timestamp {
 
     private Calendar calendar;
 
     private int day;
-    private int month;
+    private int month;              // 0-11
     private int year;
-
-    private final String[] days = {"Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"};
-
+    private String name;
 
     public Timestamp() {}
 
@@ -75,13 +71,30 @@ public class Timestamp {
         return (String.valueOf(daywithoffset));
     }
 
+    public String getDateName() {
+        DateFormatSymbols dfs = new DateFormatSymbols(new Locale("de"));
+        String weekdays[] = dfs.getWeekdays();
+        calendar.set(this.getYear(), this.getMonth(), this.getDay());
+        int d = calendar.get(Calendar.DAY_OF_WEEK);
+        name = weekdays[d];
+
+        return name;
+    }
+
+    public String getDateName(Timestamp timestamp) {
+        DateFormatSymbols dfs = new DateFormatSymbols(new Locale("de"));
+        String weekdays[] = dfs.getWeekdays();
+        calendar.set(timestamp.getYear(), timestamp.getMonth(), timestamp.getDay());
+        int d = calendar.get(Calendar.DAY_OF_WEEK);
+        name = weekdays[d];
+
+        return name;
+    }
+
     public String getFullDate() {
         calendar = Calendar.getInstance();
-
         String FullDate;
-
-        // so nicht m(
-        // FullDate = days[this.getDay()] + ", " + getDay() + "." + getMonth() + "." + getYear();
+        FullDate = getDateName() + ", " + getDay() + "." + getMonth() + "." + getYear();
 
         return FullDate;
     }
