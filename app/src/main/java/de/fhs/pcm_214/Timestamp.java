@@ -5,7 +5,7 @@ import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class Timestamp {
+public class Timestamp implements Comparable<Timestamp>{
 
     private Calendar calendar;
 
@@ -14,12 +14,16 @@ public class Timestamp {
     private int year;
     private String name;
 
+
+    private String yyyymmdd;
+
     public Timestamp() {}
 
     public Timestamp(int year, int month, int day) {
         this.day = day;
         this.month = month;
         this.year = year;
+        yyyymmdd = String.valueOf(year) + String.valueOf(month) + String.valueOf(day);
     }
 
     public Timestamp(String yyyymmdd) {
@@ -27,6 +31,15 @@ public class Timestamp {
         this.month = Integer.parseInt(getMonth(yyyymmdd));
         this.year = Integer.parseInt(getYear(yyyymmdd));
     }
+
+    public String getYyyymmdd() {
+        return yyyymmdd;
+    }
+
+    public void setYyyymmdd(String yyyymmdd) {
+        this.yyyymmdd = yyyymmdd;
+    }
+
 
     public int getYear() {
         return year;
@@ -46,6 +59,10 @@ public class Timestamp {
         calendar = Calendar.getInstance();
         int today = (calendar.get(Calendar.YEAR) * 10000) + ((calendar.get(Calendar.MONTH) + 1) * 100) +(calendar.get(Calendar.DAY_OF_MONTH));
         return(String.valueOf(today));
+    }
+
+    public String getTimestamp() {
+        return this.yyyymmdd;
     }
 
     // getTimestampWithOffset(-9); --> Heute - 9 Tage
@@ -99,6 +116,7 @@ public class Timestamp {
         return FullDate;
     }
 
+
     @Override
     public boolean equals(Object o) {
         //http://stackoverflow.com/questions/185937/overriding-the-java-equals-method-quirk
@@ -106,5 +124,19 @@ public class Timestamp {
         if (timestamp == null) return false;
         if (this.getDay() == timestamp.getDay() && this.getMonth() == timestamp.getMonth() && this.getYear() == timestamp.getYear()) return true;
         else return false;
+    }
+
+    @Override
+    public int compareTo(Timestamp another) {               // wird benötigt für array.sort()
+        if (this.equals(another))
+            return 0;
+
+        if (Integer.parseInt(this.getYyyymmdd()) < Integer.parseInt(another.getYyyymmdd()))
+            return -1;
+
+        if (Integer.parseInt(this.getYyyymmdd()) > Integer.parseInt(another.getYyyymmdd()))
+            return 1;
+
+        return 23;
     }
 }
