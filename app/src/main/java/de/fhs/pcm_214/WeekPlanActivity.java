@@ -26,6 +26,7 @@ public class WeekPlanActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week_plan);
 
+        
         ParseCSV parseCSV = null;
 
         FileInputStream in = null;
