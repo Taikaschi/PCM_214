@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -30,7 +31,26 @@ public class WeekPlanActivity extends Activity {
         ParseCSV parseCSV = null;
 
         FileInputStream in = null;
+
         try {
+            FileOutputStream out = new FileOutputStream(new File("recipe.log"));
+            int[] a = {3,6};
+            int[] b = {1,6,9};
+            int[] c = {3,6,2,8};
+            int[] d = {3,6,12,17};
+            int[] e = {3,6,4};
+            int[] f = {1,2,3};
+            int[] g = {15,16,17};
+            parseCSV.createEntry(in, out, new Timestamp("20151203"), a);
+            parseCSV.createEntry(in, out, new Timestamp("20151203"),b);
+            parseCSV.createEntry(in, out, new Timestamp("20151203"),c);
+            parseCSV.createEntry(in, out, new Timestamp("20151203"),d);
+            parseCSV.createEntry(in, out, new Timestamp("20151203"),e);
+            parseCSV.createEntry(in, out, new Timestamp("20151203"),f);
+            parseCSV.createEntry(in, out, new Timestamp("20151203"),g);
+
+
+
             in = new FileInputStream(new File("recipe.log"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();

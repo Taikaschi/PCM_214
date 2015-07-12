@@ -3,11 +3,18 @@ package de.fhs.pcm_214;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 public class DayPlanActivity extends AppCompatActivity {
 
@@ -15,6 +22,49 @@ public class DayPlanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_plan);
+
+
+        try {
+        TextView textView_rcp1 = (TextView) findViewById(R.id.textView_rcp1);
+        TextView textView_rcp2 = (TextView) findViewById(R.id.textView_rcp2);
+        TextView textView_rcp3 = (TextView) findViewById(R.id.textView_rcp3);
+        TextView textView_rcp4 = (TextView) findViewById(R.id.textView_rcp4);
+        TextView[] array = {textView_rcp1,textView_rcp2,textView_rcp3,textView_rcp4};
+
+        Timestamp timestamp = new Timestamp(getIntent().getStringExtra("DAY"));
+
+        ParseCSV parseCSV = new ParseCSV(getApplicationContext());
+
+
+            FileInputStream in = new FileInputStream(new File("recipe.log"));
+            int[] recipes = parseCSV.readEntry(in, timestamp);
+
+
+            Recipes data = new Recipes();
+
+            for (int i = 0; i < recipes.length; i++) {
+                array[i].setText(data.getRecipes(recipes[i]));
+        }
+
+           /* public void deleteEntry(FileInputStream in, FileOutputStream out, Timestamp timestamp) {                            //TODO
+
+            }
+            */
+
+        } catch (FileNotFoundException e) {
+
+        } catch (NullPointerException e) {
+            Log.d("ASD", e.getLocalizedMessage());
+        }
+
+
+        //Intent i = getIntent();
+        // Receiving the Data
+        //int[] recipe = (int) i.getIntegerArrayListExtra("result");
+
+        // Displaying Received data
+        //textView_rcp1.setText(recipe);
+
 
         Button cancel = (Button) findViewById(R.id.cancel_button);
         cancel.setOnClickListener(new View.OnClickListener() {
