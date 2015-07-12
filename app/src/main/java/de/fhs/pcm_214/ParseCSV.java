@@ -136,17 +136,12 @@ public class ParseCSV {
         String[] recipe_log = null;
         Timestamp timestamp2 = null;
         int[] recipes = null;
-
         try {
-
             reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-
             while ((line = reader.readLine()) != null) {
-
                 recipe_log = line.split("\\,");
                 timestamp2 = new Timestamp(recipe_log[0]);
                 recipes = new int[recipe_log.length - 1];
-
                 for (int i = 0; i != recipe_log.length; i++) {
                     recipes[i] = Integer.parseInt(recipe_log[i + 1]);
                 }
@@ -155,7 +150,6 @@ public class ParseCSV {
         }
         catch (FileNotFoundException e) { Toast.makeText(ParseCSV.this.fileContext, "FileNotFoundException", Toast.LENGTH_LONG).show();}
         catch (IOException e) { Toast.makeText(ParseCSV.this.fileContext, "IOException", Toast.LENGTH_LONG).show(); }
-
         return recipes;
     }
 */
@@ -246,7 +240,6 @@ public class ParseCSV {
         for (File f : files)
             f.delete();
     }
-
     public File getFile(String fileName) {
         File file = new File(cacheDir, fileName);
         return file;
