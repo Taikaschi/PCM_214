@@ -18,6 +18,22 @@ public class Day {
         this.recipes = recipes;
     }
 
+    public Day(String line) {
+
+        String[] recipe_log = line.split("\\,");
+
+        this.timestamp = new Timestamp(recipe_log[0]);
+
+        recipes = new int[recipe_log.length - 1];
+
+        for (int i = 0; i != recipe_log.length; i++) {
+            recipes[i] = Integer.parseInt(recipe_log[i + 1]);
+        }
+
+        this.setRecipes(recipes);
+
+    }
+
     public Timestamp getTimestamp() {
         return timestamp;
     }

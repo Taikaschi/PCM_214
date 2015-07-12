@@ -11,7 +11,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ParseCSV {
 
@@ -46,36 +49,45 @@ public class ParseCSV {
         }
     }
 
-    public void createEntry(FileInputStream in, FileOutputStream out, Timestamp timestamp, int[] recipes) {         //TODO: sicherstellen das die einträge chronologisch erfolgen
+    public void createEntry(FileInputStream in, FileOutputStream out, Timestamp timestamp, int[] recipes) {
         OutputStreamWriter writer = null;
         String line = "";
-        ArrayList<String> recipe_log = null;
+        ArrayList<Day> recipe_log = null;
 
-        try {
+        recipe_log = getWholeRecipeLogAsArrayListDay(in);               //ganze Datei einlesen in arraylist:day
 
-            recipe_log = getWholeRecipeLog(in);
+        line = String.valueOf(timestamp) + ",";                     // Zeile zum schreiben zusammenbauen
+        for (int i = 1; i != recipes.length; i++) {
+            line = line + String.valueOf(recipes[i]) + ",";
+        }
+        line.substring(0, line.length() - 1);
 
-            line = String.valueOf(timestamp) + ",";                     // Zeile zum schreiben zusammenbauen
-            for (int i = 1; i != recipes.length; i++) {
-                line = line + String.valueOf(recipes[i]) + ",";
+        recipe_log.add(new Day(line));
+
+        Collections.sort(recipe_log, new Comparator<Day>() {                                // hoffentlich funktioniert das
+            @Override
+            public int compare(Day lhs, Day rhs) {
+                if (lhs.equals(rhs))
+                    return 0;
+
+                if (Integer.parseInt(lhs.getTimestamp().getYyyymmdd()) < Integer.parseInt(rhs.getTimestamp().getYyyymmdd()))
+                    return -1;
+
+                if (Integer.parseInt(lhs.getTimestamp().getYyyymmdd()) > Integer.parseInt(rhs.getTimestamp().getYyyymmdd()))
+                    return 1;
+
+                return 23;
+            }
+        });
+
+        for (Day item: recipe_log) {
+            line = String.valueOf(item.getTimestamp()) + ",";
+            for (int i = 0; i < item.getRecipes().length; i++) {
+                line += String.valueOf(item.getRecipes()[i]) + ",";
             }
             line.substring(0, line.length() - 1);
 
-
-            String ts_tmp;
-            int ts;
-
-            for (int i = 0; i < recipe_log.size(); i++) {
-                ts_tmp = recipe_log.get(i).substring(0,8);
-                ts = Integer.valueOf(ts_tmp);
-            }
-
-
-
-        } catch (FileNotFoundException e) {
-            Toast.makeText(ParseCSV.this.fileContext, "FileNotFoundException:" + e.getMessage(), Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            Toast.makeText(ParseCSV.this.fileContext, "IOException:" + e.getMessage(), Toast.LENGTH_LONG).show();
+            writeLine(out,line);
         }
 
     }
@@ -124,17 +136,12 @@ public class ParseCSV {
         String[] recipe_log = null;
         Timestamp timestamp2 = null;
         int[] recipes = null;
-
         try {
-
             reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-
             while ((line = reader.readLine()) != null) {
-
                 recipe_log = line.split("\\,");
                 timestamp2 = new Timestamp(recipe_log[0]);
                 recipes = new int[recipe_log.length - 1];
-
                 for (int i = 0; i != recipe_log.length; i++) {
                     recipes[i] = Integer.parseInt(recipe_log[i + 1]);
                 }
@@ -143,7 +150,6 @@ public class ParseCSV {
         }
         catch (FileNotFoundException e) { Toast.makeText(ParseCSV.this.fileContext, "FileNotFoundException", Toast.LENGTH_LONG).show();}
         catch (IOException e) { Toast.makeText(ParseCSV.this.fileContext, "IOException", Toast.LENGTH_LONG).show(); }
-
         return recipes;
     }
 */
@@ -156,13 +162,36 @@ public class ParseCSV {
             week[i].setTimestamp(new Timestamp(monday.getYear(), monday.getMonth(), monday.getDay() + i));
             week[i].setRecipes(readEntry(in, new Timestamp(monday.getYear(), monday.getMonth(), monday.getDay() + i)));
         }
-        
+
 
         return week;
     }
 
 
-    public ArrayList<String> getWholeRecipeLog(FileInputStream in) {
+    public String[] getWholeRecipeLogAsArray(FileInputStream in) {
+
+        String[] recipe_log = null;
+        String line = null;
+
+        try {
+
+            reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+
+            int i = 0;
+            while ((line = reader.readLine()) != null) {
+                recipe_log[i] = line;
+                i++;
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            Toast.makeText(ParseCSV.this.fileContext, "FileNotFoundException:" + e.getMessage(), Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            Toast.makeText(ParseCSV.this.fileContext, "IOException:" + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        return recipe_log;
+    }
+
+    public ArrayList<String> getWholeRecipeLogAsArrayListString(FileInputStream in) {
         ArrayList<String> recipe_log = null;
         String line = null;
 
@@ -182,6 +211,27 @@ public class ParseCSV {
         return recipe_log;
     }
 
+
+    public ArrayList<Day> getWholeRecipeLogAsArrayListDay(FileInputStream in) {
+        ArrayList<Day> recipe_log = null;
+        String line = null;
+
+        try {
+
+            reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+
+            while ((line = reader.readLine()) != null) {
+                recipe_log.add(new Day(line));
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            Toast.makeText(ParseCSV.this.fileContext, "FileNotFoundException:" + e.getMessage(), Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            Toast.makeText(ParseCSV.this.fileContext, "IOException:" + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        return recipe_log;
+    }
+
     /*
     public void clear() {
         File[] files = cacheDir.listFiles();
@@ -190,7 +240,6 @@ public class ParseCSV {
         for (File f : files)
             f.delete();
     }
-
     public File getFile(String fileName) {
         File file = new File(cacheDir, fileName);
         return file;
