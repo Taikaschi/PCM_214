@@ -3,7 +3,7 @@ package de.fhs.pcm_214;
 /**
  * Created by soma on 09.07.15.
  */
-public class Day {
+public class Day implements Comparable<Day>{
 
     public Timestamp timestamp;
     public final String[] day = {"Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"};
@@ -25,11 +25,17 @@ public class Day {
         this.recipes = recipes;
     }
 
+
+    public Day(String day) {
+        this.setTimestamp(day);
+    }
+    /*
     public Day(String line) {
 
         String[] recipe_log = line.split("\\,");
+        String[] ymd = recipe_log[0].split("\\-");
 
-        this.timestamp = new Timestamp(recipe_log[0]);
+        this.timestamp = new Timestamp(Integer.valueOf(ymd[0]),Integer.valueOf(ymd[1]),Integer.valueOf(ymd[2]) );
 
         recipes = new int[recipe_log.length - 1];
 
@@ -39,7 +45,7 @@ public class Day {
 
         this.setRecipes(recipes);
 
-    }
+    }*/
 
     public Timestamp getTimestamp() {
         return timestamp;
@@ -47,6 +53,10 @@ public class Day {
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
+    }
+    public void setTimestamp(String timestamp) {
+        String[] ymd = timestamp.split("-");
+        this.setTimestamp(new Timestamp(Integer.valueOf(ymd[0]), Integer.valueOf(ymd[1]), Integer.valueOf(ymd[2])));
     }
 
     public String[] getDay() {
@@ -83,4 +93,21 @@ public class Day {
     }
 
 
+    @Override
+    public int compareTo(Day another) {
+        if (this.getTimestamp().getDate().isAfter(another.getTimestamp().getDate())) {
+            return 1;
+        }
+
+        if (this.getTimestamp().getDate().isAfter(another.getTimestamp().getDate())) {
+            return -1;
+        }
+
+        if (this.getTimestamp().getDate().isEqual(another.getTimestamp().getDate())){
+            return 0;
+        }
+
+        return 23;
+
+    }
 }

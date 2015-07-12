@@ -64,21 +64,7 @@ public class ParseCSV {
 
         recipe_log.add(new Day(line));
 
-        Collections.sort(recipe_log, new Comparator<Day>() {                                // hoffentlich funktioniert das
-            @Override
-            public int compare(Day lhs, Day rhs) {
-                if (lhs.equals(rhs))
-                    return 0;
-
-                if (Integer.parseInt(lhs.getTimestamp().getYyyymmdd()) < Integer.parseInt(rhs.getTimestamp().getYyyymmdd()))
-                    return -1;
-
-                if (Integer.parseInt(lhs.getTimestamp().getYyyymmdd()) > Integer.parseInt(rhs.getTimestamp().getYyyymmdd()))
-                    return 1;
-
-                return 23;
-            }
-        });
+        Collections.sort(recipe_log);
 
         for (Day item: recipe_log) {
             line = String.valueOf(item.getTimestamp()) + ",";
@@ -158,10 +144,12 @@ public class ParseCSV {
     public ArrayList<Day> getWeek(FileInputStream in, Timestamp monday) {
         ArrayList<Day> list = new ArrayList<>(7);
 
-
-
         for (int i = 0; i < 7; i++) {
-            list.add(new Day(new Timestamp(monday.getTimestampWithOffset(i)), readEntry(in,new Timestamp(new Timestamp().getTimestampWithOffset(i)))));
+            Timestamp offset = new Timestamp(monday.getDate().plusDays(i));
+            Day day = new Day(monday.getDate().plusDays(i).toString());
+            day.setRecipes(readEntry(in, offset));
+
+            list.add(day);
         }
 
         return list;

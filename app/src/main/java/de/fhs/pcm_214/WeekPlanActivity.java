@@ -10,6 +10,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
+import org.joda.time.LocalDate;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,11 +30,13 @@ public class WeekPlanActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week_plan);
-
+        JodaTimeAndroid.init(this);
         
         ParseCSV parseCSV = null;
 
         FileInputStream in = null;
+
+
 
         try {
             FileOutputStream out = new FileOutputStream(new File("recipe.log"));
@@ -41,13 +47,21 @@ public class WeekPlanActivity extends Activity {
             int[] e = {3,6,4};
             int[] f = {1,2,3};
             int[] g = {15,16,17};
-            parseCSV.createEntry(in, out, new Timestamp("20151203"), a);
-            parseCSV.createEntry(in, out, new Timestamp("20151203"),b);
-            parseCSV.createEntry(in, out, new Timestamp("20151203"),c);
-            parseCSV.createEntry(in, out, new Timestamp("20151203"),d);
-            parseCSV.createEntry(in, out, new Timestamp("20151203"),e);
-            parseCSV.createEntry(in, out, new Timestamp("20151203"),f);
-            parseCSV.createEntry(in, out, new Timestamp("20151203"),g);
+            parseCSV.createEntry(in, out, new Timestamp(2015, 1, 3),a);
+            parseCSV.createEntry(in, out, new Timestamp(2014, 2, 9),b);
+            parseCSV.createEntry(in, out, new Timestamp(2013, 3, 7),c);
+            parseCSV.createEntry(in, out, new Timestamp(2015, 4, 2),d);
+            parseCSV.createEntry(in, out, new Timestamp(2015, 5, 3),e);
+            parseCSV.createEntry(in, out, new Timestamp(2014, 6, 2),f);
+            parseCSV.createEntry(in, out, new Timestamp(2016, 7, 12),b);
+            parseCSV.createEntry(in, out, new Timestamp(2016, 8, 12),a);
+            parseCSV.createEntry(in, out, new Timestamp(2016, 9, 12),g);
+            parseCSV.createEntry(in, out, new Timestamp(2016, 10, 12),a);
+            parseCSV.createEntry(in, out, new Timestamp(2016, 7, 12),e);
+            parseCSV.createEntry(in, out, new Timestamp(2016, 7, 12),g);
+            parseCSV.createEntry(in, out, new Timestamp(2016, 7, 12),f);
+            parseCSV.createEntry(in, out, new Timestamp(2016, 7, 12),g);
+
 
 
 
@@ -58,7 +72,8 @@ public class WeekPlanActivity extends Activity {
 
         parseCSV = new ParseCSV(getApplicationContext());
 
-        ArrayList<Day> list = parseCSV.getWeek(in, new Timestamp().getMonday());
+        Timestamp timestamp = new Timestamp(LocalDate.now());
+        ArrayList<Day> list = parseCSV.getWeek(in, timestamp);
 
 
         WeekAdapter adapter = new WeekAdapter(this, R.layout.list_view_item_row, list);
@@ -70,7 +85,7 @@ public class WeekPlanActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), DayPlanActivity.class);
-                intent.putExtra("DAY", new Timestamp().getTimestampWithOffset(i));
+                intent.putExtra("DAY", new Timestamp().getDate().plusDays(i).toString());
                 startActivity(intent);
             }
         });

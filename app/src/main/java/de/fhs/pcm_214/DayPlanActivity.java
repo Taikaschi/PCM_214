@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,18 +24,22 @@ public class DayPlanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_plan);
+        JodaTimeAndroid.init(this);
 
 
         try {
-        TextView textView_rcp1 = (TextView) findViewById(R.id.textView_rcp1);
-        TextView textView_rcp2 = (TextView) findViewById(R.id.textView_rcp2);
-        TextView textView_rcp3 = (TextView) findViewById(R.id.textView_rcp3);
-        TextView textView_rcp4 = (TextView) findViewById(R.id.textView_rcp4);
-        TextView[] array = {textView_rcp1,textView_rcp2,textView_rcp3,textView_rcp4};
+            TextView textView_rcp1 = (TextView) findViewById(R.id.textView_rcp1);
+            TextView textView_rcp2 = (TextView) findViewById(R.id.textView_rcp2);
+            TextView textView_rcp3 = (TextView) findViewById(R.id.textView_rcp3);
+            TextView textView_rcp4 = (TextView) findViewById(R.id.textView_rcp4);
+            TextView[] array = {textView_rcp1, textView_rcp2, textView_rcp3, textView_rcp4};
 
-        Timestamp timestamp = new Timestamp(getIntent().getStringExtra("DAY"));
 
-        ParseCSV parseCSV = new ParseCSV(getApplicationContext());
+
+            Timestamp timestamp = new Timestamp(getIntent().getExtras().toString());
+
+
+            ParseCSV parseCSV = new ParseCSV(getApplicationContext());
 
 
             FileInputStream in = new FileInputStream(new File("recipe.log"));
@@ -44,7 +50,7 @@ public class DayPlanActivity extends AppCompatActivity {
 
             for (int i = 0; i < recipes.length; i++) {
                 array[i].setText(data.getRecipes(recipes[i]));
-        }
+            }
 
            /* public void deleteEntry(FileInputStream in, FileOutputStream out, Timestamp timestamp) {                            //TODO
 
