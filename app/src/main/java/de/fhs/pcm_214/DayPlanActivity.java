@@ -1,9 +1,13 @@
 package de.fhs.pcm_214;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class DayPlanActivity extends AppCompatActivity {
 
@@ -11,6 +15,29 @@ public class DayPlanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_plan);
+
+        Button cancel = (Button) findViewById(R.id.cancel_button);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cancelIntent = new Intent();
+                cancelIntent.setClass(DayPlanActivity.this, WeekPlanActivity.class);
+                startActivity(cancelIntent);
+            }
+        });
+
+        Button okay = (Button) findViewById(R.id.ok_button);
+        okay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent okIntent = new Intent();
+                okIntent.setClass(DayPlanActivity.this, WeekPlanActivity.class);
+                startActivity(okIntent);
+                Toast.makeText(getApplicationContext(),
+                        "Eingaben wurden übernommen", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     @Override

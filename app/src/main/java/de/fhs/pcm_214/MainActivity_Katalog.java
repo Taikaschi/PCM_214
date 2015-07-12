@@ -31,20 +31,14 @@ public class MainActivity_Katalog extends ActionBarActivity {
         list.setTextFilterEnabled(true);
     }
 
-    public void initModel(){
-        model.add(new Item("Käsekuchen"));
-        model.add(new Item("Kartoffelsalat"));
-        model.add(new Item("Putenbrust"));
-        model.add(new Item("Bratwurst und Sauerkraut"));
-        model.add(new Item("Jägerschnitzel"));
-        model.add(new Item("Gefüllte Paprika"));
-        model.add(new Item("Pommes Frites"));
-        model.add(new Item("Blaubeerkuchen"));
-        model.add(new Item("Chilli con carne"));
-        model.add(new Item("Schmandkuchen"));
-        model.add(new Item("Hefeklöße"));
-        model.add(new Item("Graupensuppe"));
-        model.add(new Item("Nudelsuppe"));
+
+    public void initModel()
+    {
+        String[] recipe = Recipes.init();
+        for(int i=0; i<20; i++)
+        {
+            model.add(new Item(recipe[i]));
+        }
     }
 
     public ItemArrayAdapter createAdapter(String filter){
@@ -100,6 +94,9 @@ public class MainActivity_Katalog extends ActionBarActivity {
         else if(id == R.id.action_ok)
         {
             pickChecked();
+            Intent intent = new Intent(MainActivity_Katalog.this, DayPlanActivity.class);
+            intent.putStringArrayListExtra("result", null);
+            startActivity(intent);
             return true;
         }
 
@@ -117,21 +114,26 @@ public class MainActivity_Katalog extends ActionBarActivity {
 
     public void pickChecked(){
 
-        ArrayList<Item> auswahlListe = new ArrayList<>();
-        int maxItems = Math.min(model.size(), 4);
+        int maxItems = 4;
+        int[] result = new int[maxItems];
+        for (int i=0; i<maxItems; i++)
+        {
+            result[i] = -1;
+        }
+
+        int anz = 0;
         for(int i=0; i<model.size(); i++)
         {
-            Item item = (Item) model.get(i);
-            if(item.checked && auswahlListe.size()<maxItems)
+            Item item = model.get(i);
+            if(item.checked && anz<maxItems)
             {
-                auswahlListe.add(item);
+                result[anz++] = i;
             }
         }
 
-        for(int i=0; i<auswahlListe.size(); i++)
+        for(int i=0; i<result.length; i++)
         {
-            Item item = (Item) auswahlListe.get(i);
-            Log.d("", item.recipeName);
+            Log.d("", String.valueOf(result[i]));
         }
     }
 
