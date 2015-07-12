@@ -72,7 +72,7 @@ public class WeekPlanActivity extends Activity {
 
         Calendar calendar = Calendar.getInstance();
         TextView textView = (TextView)findViewById(R.id.txtHeader);
-        textView.setText("Woche:" + calendar.get(Calendar.WEEK_OF_YEAR));
+        textView.setText("Kalenderwoche " + calendar.get(Calendar.WEEK_OF_YEAR));
 
         TextView textView1 = (TextView)findViewById(R.id.txtFooder);
         textView1.setText("Datum: " + calendar.get(Calendar.DAY_OF_MONTH) + "." +
