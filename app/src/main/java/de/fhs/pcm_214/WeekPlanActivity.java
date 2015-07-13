@@ -34,8 +34,8 @@ public class WeekPlanActivity extends Activity {
 
         JodaTimeAndroid.init(this);
         ParseCSV parseCSV = new ParseCSV(this.getApplicationContext());
-        FileInputStream in = null;
-        FileOutputStream out = null;
+        FileInputStream in;
+        FileOutputStream out;
         Timestamp today = new Timestamp(LocalDate.now());
 
         ListView listView = null;

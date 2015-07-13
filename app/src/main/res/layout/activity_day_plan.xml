@@ -51,7 +51,7 @@
             android:inputType="textMultiLine"
             android:maxLines="3"
             android:singleLine="false"
-            android:text="Hühnchen mit Bratkartoffeln und scharfer Sauce"
+            android:text="leer"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="30sp" />
 
@@ -94,7 +94,7 @@
             android:layout_toEndOf="@id/delete2"
             android:inputType="textMultiLine"
             android:maxLines="3"
-            android:text="Nudel-Auflauf mit Blumenkohl und Spinat zu Tomatensoße"
+            android:text="leer"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="30sp" />
 
@@ -136,7 +136,7 @@
             android:layout_toEndOf="@id/delete3"
             android:inputType="textMultiLine"
             android:maxLines="3"
-            android:text="Cremige Apfel-Sellerie-Suppe"
+            android:text="leer"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="30sp" />
 
@@ -179,7 +179,7 @@
             android:layout_toEndOf="@id/delete4"
             android:inputType="textMultiLine"
             android:maxLines="3"
-            android:text="Kartoffelsalat mit gebratener Zucchini, Paprika und Kichererbsen"
+            android:text="leer"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="30sp" />
 

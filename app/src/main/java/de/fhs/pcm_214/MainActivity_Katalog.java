@@ -20,7 +20,6 @@ public class MainActivity_Katalog extends ActionBarActivity {
     private ListView list;
     ArrayList<Item> model = new ArrayList<Item>();
     int result[];
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +35,7 @@ public class MainActivity_Katalog extends ActionBarActivity {
     public void initModel()
     {
         String[] recipe = Recipes.init();
-        for(int i=0; i<20; i++)
+        for(int i=0; i<21; i++)
         {
             model.add(new Item(recipe[i]));
         }
@@ -119,7 +118,7 @@ public class MainActivity_Katalog extends ActionBarActivity {
         result = new int[maxItems];
         for (int i=0; i<maxItems; i++)
         {
-            result[i] = -1;
+            result[i] = 0;
         }
 
         int anz = 0;
@@ -128,7 +127,9 @@ public class MainActivity_Katalog extends ActionBarActivity {
             Item item = model.get(i);
             if(item.checked && anz<maxItems)
             {
-                result[anz++] = i;
+                result[anz] = i;
+                anz++;
+
             }
         }
 

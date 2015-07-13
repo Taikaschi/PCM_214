@@ -1,7 +1,7 @@
 package de.fhs.pcm_214;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,40 +17,47 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
-public class DayPlanActivity extends AppCompatActivity {
+public class DayPlanActivity extends Activity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_plan);
         //JodaTimeAndroid.init(this);
 
+        ArrayList<TextView> recipeArray =new ArrayList<TextView>();
+        recipeArray.add((TextView) findViewById(R.id.textView_rcp1));
+        recipeArray.add((TextView) findViewById(R.id.textView_rcp2));
+        recipeArray.add((TextView) findViewById(R.id.textView_rcp3));
+        recipeArray.add((TextView) findViewById(R.id.textView_rcp4));
 
-        /*try {
-            TextView textView_rcp1 = (TextView) findViewById(R.id.textView_rcp1);
-            TextView textView_rcp2 = (TextView) findViewById(R.id.textView_rcp2);
-            TextView textView_rcp3 = (TextView) findViewById(R.id.textView_rcp3);
-            TextView textView_rcp4 = (TextView) findViewById(R.id.textView_rcp4);
-            TextView[] array = {textView_rcp1, textView_rcp2, textView_rcp3, textView_rcp4};
+        Intent intent = this.getIntent();
+        Recipes data = new Recipes();
+        // Receiving the Data
+        int[] receive_recipes = intent.getIntArrayExtra("result");
+
+       // Displaying Received data
+
+        for (int j = 0; j < receive_recipes.length; j++) {
+
+            if(receive_recipes.length > 0){
+                String temp = (data.getRecipes(receive_recipes[j]));
+                recipeArray.get(j).setText(temp);}
+
+        }
 
 
-
-            Timestamp timestamp = new Timestamp(getIntent().getExtras().toString());
+            /*Timestamp timestamp = new Timestamp(getIntent().getExtras().toString());
 
 
             ParseCSV parseCSV = new ParseCSV(getApplicationContext());
 
 
             FileInputStream in = openFileInput("recipe.log");
-            int[] recipes = parseCSV.readEntry(in, timestamp);
+            int[] recipes = parseCSV.readEntry(in, timestamp);*/
 
-
-            Recipes data = new Recipes();
-
-            for (int i = 0; i < recipes.length; i++) {
-                array[i].setText(data.getRecipes(recipes[i]));
-            }
 
            /* public void deleteEntry(FileInputStream in, FileOutputStream out, Timestamp timestamp) {                            //TODO
 
@@ -63,13 +70,7 @@ public class DayPlanActivity extends AppCompatActivity {
             Log.d("ASD", e.getLocalizedMessage());
         }
 
-*/      TextView textView_rcp1 = (TextView) findViewById(R.id.textView_rcp1);
-        Intent i = getIntent();
-        // Receiving the Data
-        int[] recipe = i.getIntArrayExtra("result");
-        String temp =    String.valueOf(recipe[0]);
-        // Displaying Received data
-        textView_rcp1.setText(temp);
+*/
 
 
         Button cancel = (Button) findViewById(R.id.cancel_button);
@@ -81,7 +82,15 @@ public class DayPlanActivity extends AppCompatActivity {
                 startActivity(cancelIntent);
             }
         });
-
+        Button add = (Button) findViewById(R.id.add_button);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addIntent = new Intent();
+                addIntent.setClass(DayPlanActivity.this, MainActivity_Katalog.class);
+                startActivity(addIntent,savedInstanceState);
+            }
+        });
         Button okay = (Button) findViewById(R.id.ok_button);
         okay.setOnClickListener(new View.OnClickListener() {
             @Override
