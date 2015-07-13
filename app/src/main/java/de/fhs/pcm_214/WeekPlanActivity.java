@@ -40,27 +40,16 @@ public class WeekPlanActivity extends Activity {
 
         try {
             FileOutputStream out = new FileOutputStream(new File("recipe.log"));
-            int[] a = {3,6};
-            int[] b = {1,6,9};
+            int[] a = {3,6,-1,-1};
+            int[] b = {1,6,9,-1};
             int[] c = {3,6,2,8};
             int[] d = {3,6,12,17};
-            int[] e = {3,6,4};
-            int[] f = {1,2,3};
+            int[] e = {3,6,4,-1};
+            int[] f = {1,2,3,-1};
             int[] g = {15,16,17};
-            parseCSV.createEntry(in, out, new Timestamp(2015, 1, 3),a);
-            parseCSV.createEntry(in, out, new Timestamp(2014, 2, 9),b);
-            parseCSV.createEntry(in, out, new Timestamp(2013, 3, 7),c);
-            parseCSV.createEntry(in, out, new Timestamp(2015, 4, 2),d);
-            parseCSV.createEntry(in, out, new Timestamp(2015, 5, 3),e);
-            parseCSV.createEntry(in, out, new Timestamp(2014, 6, 2),f);
-            parseCSV.createEntry(in, out, new Timestamp(2016, 7, 12),b);
-            parseCSV.createEntry(in, out, new Timestamp(2016, 8, 12),a);
-            parseCSV.createEntry(in, out, new Timestamp(2016, 9, 12),g);
-            parseCSV.createEntry(in, out, new Timestamp(2016, 10, 12),a);
-            parseCSV.createEntry(in, out, new Timestamp(2016, 7, 12),e);
-            parseCSV.createEntry(in, out, new Timestamp(2016, 7, 12),g);
-            parseCSV.createEntry(in, out, new Timestamp(2016, 7, 12),f);
-            parseCSV.createEntry(in, out, new Timestamp(2016, 7, 12),g);
+            int[] h = {3,2,1,-1};
+
+
 
 
 

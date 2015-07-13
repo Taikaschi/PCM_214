@@ -1,6 +1,5 @@
 package de.fhs.pcm_214;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import java.text.DateFormatSymbols;
@@ -82,22 +81,4 @@ public class Timestamp implements Comparable<Timestamp>{
 
         return 23;
     }
-/*
-    @Override
-    public int compareTo(LocalDate another) {
-        if (this.getDate().isAfter(another)) {
-            return 1;
-        }
-
-        if (this.getDate().isAfter(another)) {
-            return -1;
-        }
-
-        if (this.getDate().isEqual(another)) {
-            return 0;
-        }
-
-        return 23;
-    }
-*/
 }
