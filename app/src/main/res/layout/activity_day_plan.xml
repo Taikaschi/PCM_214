@@ -18,34 +18,32 @@
         android:gravity="center_horizontal"
         android:text="@string/textViewDate"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="34sp"
         android:textStyle="bold" />
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.25" />
+        android:layout_height="80sp" />
 
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
+        android:layout_height="120sp"
         android:orientation="horizontal">
 
 
         <Button
             android:id="@+id/delete1"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
             android:layout_alignParentStart="false"
-            android:layout_gravity="left|center_vertical"
+            android:layout_gravity="start|center_vertical"
             android:background="@drawable/button_cancel" />
 
 
         <TextView
             android:id="@+id/textView_rcp1"
-            android:layout_width="250dp"
+            android:layout_width="450sp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="false"
             android:layout_gravity="center_horizontal"
@@ -55,16 +53,15 @@
             android:singleLine="false"
             android:text="Hühnchen mit Bratkartoffeln und scharfer Sauce"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/editTextNumber1"
-            android:layout_width="wrap_content"
+            android:layout_width="80sp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_gravity="right"
-            android:layout_toEndOf="@+id/textView_rcp1"
-            android:gravity="bottom|right"
+            android:layout_gravity="end"
+            android:gravity="bottom|end"
             android:inputType="number"
             android:text="000"
             android:textSize="20sp" />
@@ -79,39 +76,38 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
+        android:layout_height="120sp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/delete2"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
             android:layout_alignParentStart="false"
-            android:layout_gravity="left|center_vertical"
+            android:layout_gravity="start|center_vertical"
             android:background="@drawable/button_cancel" />
 
         <TextView
             android:id="@+id/textView_rcp2"
-            android:layout_width="250dp"
+            android:layout_width="450sp"
             android:layout_height="match_parent"
             android:layout_toEndOf="@id/delete2"
             android:inputType="textMultiLine"
             android:maxLines="3"
             android:text="Nudel-Auflauf mit Blumenkohl und Spinat zu Tomatensoße"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/editTextNumber2"
-            android:layout_width="wrap_content"
+            android:layout_width="80sp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="false"
-            android:layout_toEndOf="@id/textView_rcp2"
             android:gravity="bottom|end"
             android:inputType="number"
             android:text="000"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
     </RelativeLayout>
 
     <Space
@@ -122,35 +118,34 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
+        android:layout_height="120sp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/delete3"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
             android:layout_alignParentStart="false"
             android:layout_gravity="start|center_vertical"
             android:background="@drawable/button_cancel" />
 
         <TextView
             android:id="@+id/textView_rcp3"
-            android:layout_width="250dp"
+            android:layout_width="450sp"
             android:layout_height="match_parent"
             android:layout_toEndOf="@id/delete3"
             android:inputType="textMultiLine"
             android:maxLines="3"
             android:text="Cremige Apfel-Sellerie-Suppe"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/editTextNumber3"
-            android:layout_width="wrap_content"
+            android:layout_width="80sp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="false"
-            android:layout_toEndOf="@id/textView_rcp3"
             android:gravity="bottom|end"
             android:inputType="number"
             android:text="000"
@@ -165,20 +160,20 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
+        android:layout_height="120sp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/delete4"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
             android:layout_alignParentStart="false"
             android:layout_gravity="start|center_vertical"
             android:background="@drawable/button_cancel" />
 
         <TextView
             android:id="@+id/textView_rcp4"
-            android:layout_width="250dp"
+            android:layout_width="450sp"
             android:layout_height="match_parent"
             android:layout_alignParentStart="false"
             android:layout_toEndOf="@id/delete4"
@@ -186,26 +181,24 @@
             android:maxLines="3"
             android:text="Kartoffelsalat mit gebratener Zucchini, Paprika und Kichererbsen"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/editTextNumber4"
-            android:layout_width="wrap_content"
+            android:layout_width="80sp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@id/textView_rcp4"
-            android:ems="10"
             android:gravity="bottom|end"
             android:inputType="number"
             android:text="000"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_alignParentTop="false" />
     </RelativeLayout>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.4" />
+        android:layout_height="100sp"
+        android:layout_gravity="center_horizontal" />
 
 
     <RelativeLayout
@@ -221,8 +214,9 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/button_cancel"
-            android:minHeight="64dp"
-            android:minWidth="64dp" />
+            android:minHeight="64sp"
+            android:minWidth="64sp"
+            android:nestedScrollingEnabled="true" />
 
         <Button
             android:id="@+id/add_button"
@@ -232,8 +226,8 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button_add"
-            android:minHeight="64dp"
-            android:minWidth="64dp" />
+            android:minHeight="64sp"
+            android:minWidth="64sp" />
 
         <Button
             android:id="@+id/ok_button"
@@ -243,8 +237,8 @@
             android:layout_alignParentTop="true"
             android:background="@drawable/ok_button"
             android:gravity="end"
-            android:minHeight="64dp"
-            android:minWidth="64dp" />
+            android:minHeight="64sp"
+            android:minWidth="64sp" />
     </RelativeLayout>
 
 </LinearLayout>
