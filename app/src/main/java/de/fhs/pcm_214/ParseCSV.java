@@ -61,7 +61,7 @@ public class ParseCSV {
         ArrayList<Day> recipe_log =  getWholeRecipeLogAsArrayListDay(in);                       //ganze Datei einlesen in arraylist:day
 
         line = timestamp.getDateString() + ",";                                 // Zeile zum schreiben zusammenbauen
-        for (int i = 0; i != recipes.length; i++) {
+        for (int i = 0; i < recipes.length - 1; i++) {
             line = line + Integer.toString(recipes[i]) + ",";
         }
         line = line.substring(0, line.length() - 1);
@@ -75,13 +75,17 @@ public class ParseCSV {
         initDirectory(fileContext);
 
         for (Day item : recipe_log) {
-            line = item.getTimestamp() + ",";
-            int[] item_array = item.getRecipes();
+            line = "";
+            line += item.getTimestamp().getDateString();
+            line += ",";
 
-            item.setRecipes();
+            for (int i = 0; i < item.getRecipes().length+1; i++) {
+                line += item.getRecipes()[i];
+                line += ",";
+            }
+            line = line.substring(0, line.length() - 1);
 
-
-            writeLine(out, line);
+               writeLine(out, line);
         }
 
     }

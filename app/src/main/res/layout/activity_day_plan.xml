@@ -23,7 +23,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="80sp" />
+        android:layout_height="60sp" />
 
 
     <RelativeLayout
@@ -43,7 +43,7 @@
 
         <TextView
             android:id="@+id/textView_rcp1"
-            android:layout_width="450sp"
+            android:layout_width="420sp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="false"
             android:layout_gravity="center_horizontal"
@@ -57,7 +57,7 @@
 
         <EditText
             android:id="@+id/editTextNumber1"
-            android:layout_width="80sp"
+            android:layout_width="40sp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_gravity="end"
@@ -89,7 +89,7 @@
 
         <TextView
             android:id="@+id/textView_rcp2"
-            android:layout_width="450sp"
+            android:layout_width="420sp"
             android:layout_height="match_parent"
             android:layout_toEndOf="@id/delete2"
             android:inputType="textMultiLine"
@@ -100,7 +100,7 @@
 
         <EditText
             android:id="@+id/editTextNumber2"
-            android:layout_width="80sp"
+            android:layout_width="40sp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="false"
@@ -131,7 +131,7 @@
 
         <TextView
             android:id="@+id/textView_rcp3"
-            android:layout_width="450sp"
+            android:layout_width="420sp"
             android:layout_height="match_parent"
             android:layout_toEndOf="@id/delete3"
             android:inputType="textMultiLine"
@@ -142,7 +142,7 @@
 
         <EditText
             android:id="@+id/editTextNumber3"
-            android:layout_width="80sp"
+            android:layout_width="40sp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="false"
@@ -173,7 +173,7 @@
 
         <TextView
             android:id="@+id/textView_rcp4"
-            android:layout_width="450sp"
+            android:layout_width="420sp"
             android:layout_height="match_parent"
             android:layout_alignParentStart="false"
             android:layout_toEndOf="@id/delete4"
@@ -185,7 +185,7 @@
 
         <EditText
             android:id="@+id/editTextNumber4"
-            android:layout_width="80sp"
+            android:layout_width="40sp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:gravity="bottom|end"
@@ -197,7 +197,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="100sp"
+        android:layout_height="40sp"
         android:layout_gravity="center_horizontal" />
 
 

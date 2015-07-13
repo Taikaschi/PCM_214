@@ -10,9 +10,12 @@ public class Day implements Comparable<Day>{
     public int[] recipes;
     public int icon;
 
+    public int[] initRecipe(){
+        return new int[]{0};
+    }
 
     public Day() {
-        super();
+       initRecipe();
     }
 
 
@@ -29,6 +32,9 @@ public class Day implements Comparable<Day>{
     public Day(String day) {
         String[] timestamp_and_recipes = day.split(",");
         this.setTimestamp(timestamp_and_recipes[0]);
+        for (int i = 1; i < timestamp_and_recipes.length; i++) {
+            recipes[i] = Integer.parseInt(timestamp_and_recipes[i]);
+        }
     }
     /*
     public Day(String line) {
@@ -68,7 +74,7 @@ public class Day implements Comparable<Day>{
         return recipes;
     }
 
-    public void addRecipe()
+
 
     public void setRecipes(int[] recipes) {
         this.recipes = recipes;
