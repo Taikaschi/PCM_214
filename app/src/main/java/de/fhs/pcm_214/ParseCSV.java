@@ -75,12 +75,11 @@ public class ParseCSV {
         initDirectory(fileContext);
 
         for (Day item : recipe_log) {
-            line = timestamp.getDateString() + ",";
+            line = item.getTimestamp() + ",";
             int[] item_array = item.getRecipes();
-            for (int i = 0; i < item_array.length; i++) {
-                line += String.valueOf(item.getRecipes()[i]) + ",";
-            }
-            line = line.substring(0, line.length() - 1);
+
+            item.setRecipes();
+
 
             writeLine(out, line);
         }

@@ -68,6 +68,8 @@ public class Day implements Comparable<Day>{
         return recipes;
     }
 
+    public void addRecipe()
+
     public void setRecipes(int[] recipes) {
         this.recipes = recipes;
     }
