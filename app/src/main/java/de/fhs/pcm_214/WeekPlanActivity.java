@@ -1,6 +1,7 @@
 package de.fhs.pcm_214;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -40,17 +41,17 @@ public class WeekPlanActivity extends Activity {
         ListView listView = null;
 
         try {
-            out = new FileOutputStream(new File("recipe.log"));
-            in = new FileInputStream(new File("recipe.log"));
+            out = openFileOutput("recipe.log", Context.MODE_PRIVATE);
+            in = openFileInput("recipe.log");
 
-            int[] a = {3, 6, -1, -1};
-            int[] b = {1, 6, 9, -1};
+            int[] a = {3, 6};
+            int[] b = {1, 6, 9};
             int[] c = {3, 6, 2, 8};
             int[] d = {3, 6, 12, 17};
-            int[] e = {3, 6, 4, -1};
-            int[] f = {1, 2, 3, -1};
+            int[] e = {3, 6, 4};
+            int[] f = {1, 2, 3};
             int[] g = {15, 16, 17};
-            int[] h = {3, 2, 1, -1};
+            int[] h = {3, 2, 1};
 
             parseCSV.createEntry(this.getApplicationContext(), in, out, new Timestamp(2015, 7, 1), a);
             parseCSV.createEntry(this.getApplicationContext(), in, out, new Timestamp(2015, 7, 7), b);

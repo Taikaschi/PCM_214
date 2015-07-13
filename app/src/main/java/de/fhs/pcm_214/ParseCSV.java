@@ -58,17 +58,16 @@ public class ParseCSV {
         this.fileContext = fileContext;
         OutputStreamWriter writer = null;
         String line = "";
-        ArrayList<Day> recipe_log = null;
-
-        recipe_log = getWholeRecipeLogAsArrayListDay(in);                       //ganze Datei einlesen in arraylist:day
+        ArrayList<Day> recipe_log =  getWholeRecipeLogAsArrayListDay(in);                       //ganze Datei einlesen in arraylist:day
 
         line = timestamp.getDateString() + ",";                                 // Zeile zum schreiben zusammenbauen
-        for (int i = 1; i != recipes.length; i++) {
-            line = line + String.valueOf(recipes[i]) + ",";
+        for (int i = 0; i != recipes.length; i++) {
+            line = line + Integer.toString(recipes[i]) + ",";
         }
-        line.substring(0, line.length() - 1);
+        line = line.substring(0, line.length() - 1);
 
-        recipe_log.add(new Day(line));                                          // zeile zu arraylist hinzufügen
+        Day new_day = new Day(line);
+        recipe_log.add(new_day);                                          // zeile zu arraylist hinzufügen
 
         Collections.sort(recipe_log);                                           // array list nach zeit sortieren
 
@@ -77,10 +76,11 @@ public class ParseCSV {
 
         for (Day item : recipe_log) {
             line = timestamp.getDateString() + ",";
-            for (int i = 0; i < item.getRecipes().length; i++) {
+            int[] item_array = item.getRecipes();
+            for (int i = 0; i < item_array.length; i++) {
                 line += String.valueOf(item.getRecipes()[i]) + ",";
             }
-            line.substring(0, line.length() - 1);
+            line = line.substring(0, line.length() - 1);
 
             writeLine(out, line);
         }
@@ -150,7 +150,7 @@ public class ParseCSV {
 
     private ArrayList<Day> getWholeRecipeLogAsArrayListDay(FileInputStream in) {
         BufferedReader reader = null;
-        ArrayList<Day> recipe_log = null;
+        ArrayList<Day> recipe_log = new ArrayList<>();
         String line = null;
 
         try {

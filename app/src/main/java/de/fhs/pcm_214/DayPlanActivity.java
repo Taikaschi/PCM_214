@@ -42,7 +42,7 @@ public class DayPlanActivity extends AppCompatActivity {
             ParseCSV parseCSV = new ParseCSV(getApplicationContext());
 
 
-            FileInputStream in = new FileInputStream(new File("recipe.log"));
+            FileInputStream in = openFileInput("recipe.log");
             int[] recipes = parseCSV.readEntry(in, timestamp);
 
 

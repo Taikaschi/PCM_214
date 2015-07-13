@@ -27,7 +27,8 @@ public class Day implements Comparable<Day>{
 
 
     public Day(String day) {
-        this.setTimestamp(day);
+        String[] timestamp_and_recipes = day.split(",");
+        this.setTimestamp(timestamp_and_recipes[0]);
     }
     /*
     public Day(String line) {

@@ -37,8 +37,8 @@ public class DayAdapter extends ArrayAdapter<Day> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.list_view_item_row, parent, false);
 
-        textDate = (TextView) itemView.findViewById(R.id.textDate);
-        textDateName = (TextView)itemView.findViewById(R.id.textDateName);
+        textDate = (TextView) itemView.findViewById(R.id.textViewDate);
+        textDateName = (TextView)itemView.findViewById(R.id.textView_rcp1);
 
         Day day = data.get(position);
         textDateName.setText(day.getTimestamp().getDateName(day.getTimestamp()));

@@ -4,7 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-    <string name="title_activity_day_plan">DayPlanActivity</string>
+    <string name="title_activity_day_plan">Tagesplan</string>
     <string name="textViewDate">Tagesplan für den 07.07.2015</string>
 
     <string name="title_activity_main_katalog">Katalog</string>
