@@ -24,10 +24,10 @@ public class DayPlanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_plan);
-        JodaTimeAndroid.init(this);
+        //JodaTimeAndroid.init(this);
 
 
-        try {
+        /*try {
             TextView textView_rcp1 = (TextView) findViewById(R.id.textView_rcp1);
             TextView textView_rcp2 = (TextView) findViewById(R.id.textView_rcp2);
             TextView textView_rcp3 = (TextView) findViewById(R.id.textView_rcp3);
@@ -57,19 +57,19 @@ public class DayPlanActivity extends AppCompatActivity {
             }
             */
 
-        } catch (FileNotFoundException e) {
+       /* } catch (FileNotFoundException e) {
 
         } catch (NullPointerException e) {
             Log.d("ASD", e.getLocalizedMessage());
         }
 
-
-        //Intent i = getIntent();
+*/      TextView textView_rcp1 = (TextView) findViewById(R.id.textView_rcp1);
+        Intent i = getIntent();
         // Receiving the Data
-        //int[] recipe = (int) i.getIntegerArrayListExtra("result");
-
+        int[] recipe = i.getIntArrayExtra("result");
+        String temp =    String.valueOf(recipe[0]);
         // Displaying Received data
-        //textView_rcp1.setText(recipe);
+        textView_rcp1.setText(temp);
 
 
         Button cancel = (Button) findViewById(R.id.cancel_button);
