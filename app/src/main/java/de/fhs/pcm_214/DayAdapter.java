@@ -10,52 +10,41 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by soma on 09.07.2015.
- */
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+
 public class DayAdapter extends ArrayAdapter<Day> {
 
     Context context;
     int layoutResourceId;
-    Day data[] = null;
+    ArrayList<Day> data = null;
+    TextView textDateName = null;
+    TextView textDate = null;
+    ImageView imageView = null;
 
-    static class DayHolder {
-        ImageView icon;
-        TextView text;
-
-    }
-
-    public DayAdapter(Context context, int layoutResourceId, Day[] data) {
+    public DayAdapter(Context context, int layoutResourceId, ArrayList<Day> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
+
+
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        DayHolder holder = null;
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View itemView = inflater.inflate(R.layout.list_view_item_row, parent, false);
 
-        if (row == null) {
-            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-            row = inflater.inflate(layoutResourceId, parent, false);
+        textDate = (TextView) itemView.findViewById(R.id.textDate);
+        textDateName = (TextView)itemView.findViewById(R.id.textDateName);
 
-            holder = new DayHolder();
-            holder.icon = (ImageView) row.findViewById(R.id.image);
-            //holder.text = (TextView)row.findViewById(R.id.textDay);
+        Day day = data.get(position);
+        textDateName.setText(day.getTimestamp().getDateName(day.getTimestamp()));
+        textDate.setText(day.getTimestamp().getDateName(day.getTimestamp()) + "," + day.getTimestamp().getDateString());
 
-
-            row.setTag(holder);
-        } else {
-            holder = (DayHolder) row.getTag();
-        }
-
-        Day day = data[position];
-        //holder.text.setText(day.);
-        //holder.icon.setImageResource();
-
-        return row;
+        return itemView;
     }
 }
 

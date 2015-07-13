@@ -55,10 +55,10 @@ public class WeekAdapter extends ArrayAdapter<Day> {
 
         Day day = getItem(position);
 
-        holder.txtTitle.setText(day.getTimestamp().getDateName());
+        holder.txtTitle.setText(day.getTimestamp().getDate().getDayOfMonth());
 
         holder.imgIcon.setImageResource(day.icon);
-        holder.txtDate.setText(day.getTimestamp().getFullDate());
+        holder.txtDate.setText(day.getTimestamp().getDateString() + day.getTimestamp().getDateName(day.getTimestamp()));
         return row;
     }
     static class WeekHolder
